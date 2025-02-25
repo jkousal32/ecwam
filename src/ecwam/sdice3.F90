@@ -136,15 +136,22 @@
          DO K = 1,NANG
             DO IJ = KIJS,KIJL
 
-!              apply the source term
-               FLDICE         = -ALP(IJ,M)   * CGROUP(IJ,M)   
-               SLICE(IJ,K,M)  =  FL1(IJ,K,M) * FLDICE
-               SL(IJ,K,M)     =  SL(IJ,K,M)  + CICV(IJ)*SLICE(IJ,K,M)
-               FLD(IJ,K,M)    =  FLD(IJ,K,M) + CICV(IJ)*FLDICE
-               
-!              to be used for wave radiative stress calculation
-               GTEMP1         =  MAX((1.0_JWRB-DELT5*FLDICE),1.0_JWRB)    
-               SLICE(IJ,K,M)  =  SLICE(IJ,K,M)/GTEMP1
+!              revert back to old way to test for bit identicality
+               TEMP        = -CICV(IJ)*ALP(IJ,M)*CGROUP(IJ,M)         
+               SL(IJ,K,M)  = SL(IJ,K,M)  + FL1(IJ,K,M)*TEMP
+               FLD(IJ,K,M) = FLD(IJ,K,M) + TEMP
+               GTEMP1         =  MAX((1.0_JWRB-DELT5*1.0_JWRB),1.0_JWRB)    ! wrong, but not used when not coupled
+               SLICE(IJ,K,M)  =  1.0_JWRB/GTEMP1                            ! wrong, but not used when not coupled
+
+! !              apply the source term
+!                FLDICE         = -ALP(IJ,M)   * CGROUP(IJ,M)   
+!                SLICE(IJ,K,M)  =  FL1(IJ,K,M) * FLDICE
+!                SL(IJ,K,M)     =  SL(IJ,K,M)  + CICV(IJ)*SLICE(IJ,K,M)
+!                FLD(IJ,K,M)    =  FLD(IJ,K,M) + CICV(IJ)*FLDICE
+!                
+! !              to be used for wave radiative stress calculation
+!                GTEMP1         =  MAX((1.0_JWRB-DELT5*FLDICE),1.0_JWRB)    
+!                SLICE(IJ,K,M)  =  SLICE(IJ,K,M)/GTEMP1
 
             END DO
          END DO
