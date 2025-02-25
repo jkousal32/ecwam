@@ -86,7 +86,7 @@
       
       INTEGER(KIND=JWIM) :: IMODEL                              !! DAMPING MODEL: 1=FIT TO TEMPELFJORD DATA, 2=Jie Yu 2022
       INTEGER(KIND=JWIM) :: IJ, K, M
-      REAL(KIND=JWRB)    :: FLDICE
+      REAL(KIND=JWRB)    :: FLDICE, TEMP
 
       REAL(KIND=JWRB) :: DELT, DELTM, XIMP, DELT5, GTEMP1
       
