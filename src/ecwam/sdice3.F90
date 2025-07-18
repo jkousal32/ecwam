@@ -119,7 +119,10 @@
          
            DO M = 1,NFRE
               DO IJ = KIJS,KIJL
-                 ALP(IJ,M) = (2._JWRB*CDICE*(CITH(IJ)**(1.25_JWRB))*(FR(M)**(4.5_JWRB))) * ALPFAC(IJ)
+               !   ALP(IJ,M) = (2._JWRB*CDICE*(CITH(IJ)**(1.25_JWRB))*(FR(M)**(4.5_JWRB))) * ALPFAC(IJ)
+                 ! add in double erroneous scaling by cover to simulate the bug we had before in the operational pipeline 
+                 !  - it has already been removed from micep in this branch, hence double
+                 ALP(IJ,M) = (CICV(IJ)**2)*(2._JWRB*CDICE*(CITH(IJ)**(1.25_JWRB))*(FR(M)**(4.5_JWRB))) * ALPFAC(IJ) 
               END DO
            END DO
          
