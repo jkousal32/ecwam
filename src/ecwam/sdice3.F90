@@ -119,7 +119,7 @@
          
            DO M = 1,NFRE
               DO IJ = KIJS,KIJL
-                 ALP(IJ,M) = (2._JWRB*CDICE*(CITH(IJ)**(1.25_JWRB))*(FR(M)**(4.5_JWRB))) * ALPFAC(IJ)
+                 ALP(IJ,M) = (2._JWRB*CDICE*(CITH(IJ)**(0.75_JWRB))*(FR(M)**(4.5_JWRB))) * ALPFAC(IJ)
               END DO
            END DO
          
