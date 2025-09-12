@@ -72,6 +72,8 @@
         INTFLDS%ALTWH(:,:)   = ZMISS
         INTFLDS%CALTWH(:,:)  = ZMISS
         INTFLDS%RALTCOR(:,:) = ZMISS
+        INTFLDS%WCF(:,:)     = ZMISS
+        INTFLDS%TLEMEAN(:,:) = ZMISS
       ENDIF
 
 
