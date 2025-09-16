@@ -67,7 +67,7 @@
       USE YOWDRVTYPE  , ONLY : ENVIRONMENT, FREQUENCY, FORCING_FIELDS,  &
      &                         INTGT_PARAM_FIELDS, WAVE2OCEAN
 
-      USE YOWCOUP  , ONLY : LWFLUX   ,LWSPRAY, LWWCF, LWVFLX_SNL,       &
+      USE YOWCOUP  , ONLY : LWFLUX   ,LWCOUSPRAY, LWWCF, LWVFLX_SNL,    &
                             LWNEMOCOUSTRN, LWNEMOCOUIBR, LWNEMOCOUWRS
       USE YOWCOUT  , ONLY : LWFLUXOUT 
       USE YOWFRED  , ONLY : FR       ,TH
@@ -158,7 +158,7 @@ IF (LHOOK) CALL DR_HOOK('WDFLUXES',0,ZHOOK_HANDLE)
 !*    1. INITIALISATION.
 !        ---------------
 
-      LCFLX=LWFLUX.OR.LWFLUXOUT.OR.LWWCF.OR.LWSPRAY
+      LCFLX=LWFLUX.OR.LWFLUXOUT.OR.LWWCF.OR.LWCOUSPRAY
 
       DELT  = IDELT
       DELTM = 1.0_JWRB/DELT
@@ -292,7 +292,28 @@ IF (LHOOK) CALL DR_HOOK('WDFLUXES',0,ZHOOK_HANDLE)
      &                  .FALSE.)
         ENDIF
 
-        IF (LWFLUX .OR. LWSPRAY) THEN
+        CALL SNONLIN (KIJS, KIJL, FL1, FLD, SL, WAVNUM, DEPTH, AKMEAN)
+
+        IF (LWVFLX_SNL) THEN
+          CALL WNFLUXES (KIJS, KIJL,                        &
+     &                   MIJ, RHOWGDFTH,                    &
+     &                   CINV,                              &
+     &                   SSOURCE, SLICE, CICOVER,           &
+     &                   PHIWA,                             &
+     &                   EMEAN, F1MEAN, WSWAVE, WDWAVE,     &
+     &                   USTRA, VSTRA,                      &
+     &                   UFRIC, AIRD,                       &
+     &                   NPHIEPS, NTAUOC, NSWH, NMWP,       &
+     &                   NEMOTAUX, NEMOTAUY,                &
+     &                   NEMOTAUICX, NEMOTAUICY,            &
+     &                   NEMOWSWAVE, NEMOPHIF,              &
+     &                   TAUXD, TAUYD, TAUOCXD, TAUOCYD,    &
+     &                   TAUOC, TAUICX, TAUICY,             &
+     &                   PHIOCD, PHIEPS, PHIAW,             &
+     &                  .FALSE.)
+        ENDIF
+
+        IF (LWFLUX .OR. LWCOUSPRAY) THEN
          CALL FEMEANWS(KIJS, KIJL, FL1, XLLWS, FMEANWS, EMEANWS)
 
           DO IJ=KIJS,KIJL
