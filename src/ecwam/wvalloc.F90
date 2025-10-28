@@ -74,7 +74,6 @@
         DO ICHNK=1,NCHNK
           INTFLDS%PHIEPS(:, ICHNK)  = 0.0_JWRB
           INTFLDS%PHIAW(:, ICHNK)   = 0.0_JWRB
-          INTFLDS%UPROXY(:, ICHNK)  = 0.0_JWRB
           INTFLDS%TAUOC(:, ICHNK)   = 0.0_JWRB
           INTFLDS%STRNMS(:, ICHNK)  = 0.0_JWRB
           INTFLDS%ALTWH(:, ICHNK)   = ZMISS
