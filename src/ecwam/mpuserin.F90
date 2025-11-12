@@ -98,7 +98,7 @@
      &            IDELWO   ,IDELALT  ,IREST    ,IDELRES  ,IDELINT  ,    &
      &            IDELBC   ,                                            &
      &            ICASE    ,ISHALLO  ,                                  &
-     &            IPHYS    ,IPHYS2_AIRSEA,LLLOWWINDS,              &
+     &            IPHYS    ,IPHYS2_AIRSEA,LLLOWWINDS     ,ZCDFAC   ,    &
      &            ISNONLIN ,                                            &
      &            IDAMPING ,                                            &
      &            LBIWBK   ,                                            &
@@ -231,7 +231,7 @@
      &   LWCOUNORMS, LLNORMIFS2WAM, LLNORMWAM2IFS, LLNORMWAMOUT,        &
      &   LLNORMWAMOUT_GLOBAL, CNORMWAMOUT_FILE,                         &
      &   LICERUN, LCIWA1, LCIWA2, LCIWA3, LCISCAL,                      &
-     &   LICETH, ZALPFACB, ZALPFACX, ZALPWRS, ZIBRW_THRSH,              &
+     &   LICETH, ZALPFACB, ZALPFACX, ZALPWRS, ZCDFAC, ZIBRW_THRSH,      &
      &   LWVFLX_SNL,                                                    &
      &   LWNEMOCOU, NEMOFRCO,                                           &
      &   LWNEMOCOUSEND, LWNEMOCOUSTK, LWNEMOCOUSTRN, LWNEMOCOUWRS,      &
@@ -592,7 +592,8 @@
       ISHALLO   = 0   !! depricated 
       IPHYS     = 1
       IPHYS2_AIRSEA = 0
-      LLLOWWINDS = .FALSE. ! .TRUE. if low winds are treated differently
+      LLLOWWINDS = .FALSE.
+      ZCDFAC    = 1.0_JWRB
       ISNONLIN  = 1 
       IDAMPING  = 1 
       IPROPAGS  = 0 
