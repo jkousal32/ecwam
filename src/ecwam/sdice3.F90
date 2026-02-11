@@ -127,7 +127,10 @@
            ENDDO
            CDICE2 = 2._JWRB*CDICE*ZALPFACB
            DO IJ = KIJS,KIJL
-             ALPTMP(IJ) = (CDICE2*(CITH(IJ)**1.25_JWRB)) * ALPFAC(IJ) 
+!             ALPTMP(IJ) = (CDICE2*(CITH(IJ)**1.25_JWRB)) * ALPFAC(IJ)
+             ! As feasibility test increase thickness power dependency. 
+             !   - This is actually now in line with the thickness power dependency given in DeSanti 2024
+             ALPTMP(IJ) = (CDICE2*(CITH(IJ)**1.50_JWRB)) * ALPFAC(IJ) 
            ENDDO
            DO M = 1,NFRE
              DO IJ = KIJS,KIJL
