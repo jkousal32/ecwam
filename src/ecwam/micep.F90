@@ -263,13 +263,15 @@ SUBROUTINE MICEP (IPARAM, KIJS, KIJL, IFROMIJ, JFROMIJ,    &
 !             if lake cover = 0, we assume open ocean point, then get ice breakup directly from NEMO
               IBRMEM(IJ) = NEMOCIIBR(IJ)
             ENDIF
-!           over lakes, IBRMEM keeps its existing (initialised) value
+              IBRMEM(IJ) = 1.0_JWRB
           ENDDO
         ELSE
           DO IJ=KIJS,KIJL
             IBRMEM(IJ) = NEMOCIIBR(IJ)
           ENDDO
         ENDIF
+      ELSE
+        IBRMEM(:) = 1.0_JWRB        
       ENDIF
 
       IF (LHOOK) CALL DR_HOOK('MICEP',1,ZHOOK_HANDLE)
