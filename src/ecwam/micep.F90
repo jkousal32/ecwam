@@ -262,8 +262,9 @@ SUBROUTINE MICEP (IPARAM, KIJS, KIJL, IFROMIJ, JFROMIJ,    &
             IF (FIELDG%LKFR(IX,IY) <= 0.0_JWRB) THEN
 !             if lake cover = 0, we assume open ocean point, then get ice breakup directly from NEMO
               IBRMEM(IJ) = NEMOCIIBR(IJ)
-            ENDIF
+            ELSE
               IBRMEM(IJ) = 1.0_JWRB
+            ENDIF
           ENDDO
         ELSE
           DO IJ=KIJS,KIJL
