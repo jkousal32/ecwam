@@ -370,32 +370,32 @@
 
 !     PARAMETER 064
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 64, '064', 140114, 0, 10, 12, .True., .True., &
+      IR = DEFINE_PARAMETER( 64, 'h1012', 140114, 0, 10, 12, .True., .True., &
                            & 'SIG. WAVE HEIGHT 10<=T<=12' )
 
 !     PARAMETER 065
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 65, '065', 140115, 0, 12, 14, .True., .True., &
+      IR = DEFINE_PARAMETER( 65, 'h1214', 140115, 0, 12, 14, .True., .True., &
                            & 'SIG. WAVE HEIGHT 12<=T<=14' )
 
 !     PARAMETER 066
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 66, '066', 140116, 0, 14, 17, .True., .True., &
+      IR = DEFINE_PARAMETER( 66, 'h1417', 140116, 0, 14, 17, .True., .True., &
                            & 'SIG. WAVE HEIGHT 14<=T<=17' )
 
 !     PARAMETER 067
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 67, '067', 140117, 0, 17, 21, .True., .True., &
+      IR = DEFINE_PARAMETER( 67, 'h1721', 140117, 0, 17, 21, .True., .True., &
                            & 'SIG. WAVE HEIGHT 17<=T<=21' )
 
 !     PARAMETER 068
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 68, '068', 140118, 0, 21, 25, .True., .True., &
+      IR = DEFINE_PARAMETER( 68, 'h2125', 140118, 0, 21, 25, .True., .True., &
                            & 'SIG. WAVE HEIGHT 21<=T<=25' )
 
 !     PARAMETER 069
       NTEWH = NTEWH + 1
-      IR = DEFINE_PARAMETER( 69, '069', 140119, 0, 25, 30, .True., .True., &
+      IR = DEFINE_PARAMETER( 69, 'h2530', 140119, 0, 25, 30, .True., .True., &
                            & 'SIG. WAVE HEIGHT 25<=T<=30' )
 
 !     PARAMETER 070

@@ -188,22 +188,22 @@ parameters:
         '063':
                 index: 63
                 description: Wave energy flux direction
-        '064':
+        h1012:
                 index: 64
                 description: Significant wave height 10<=T<=12
-        '065':
+        h1214:
                 index: 65
                 description: Significant wave height 12<=T<=14
-        '066':
+        h1417:
                 index: 66
                 description: Significant wave height 14<=T<=17
-        '067':
+        h1721:
                 index: 67
                 description: Significant wave height 17<=T<=21
-        '068':
+        h2125:
                 index: 68
                 description: Significant wave height 21<=T<=25
-        '069':
+        h2530:
                 index: 69
                 description: Significant wave height 25<=T<=30
         '070':

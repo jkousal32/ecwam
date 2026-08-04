@@ -43,6 +43,12 @@ output:
           - dwi         # 10 metre wind direction 
           - cdww        # Coefficient of drag with waves
           - wind        # 10 metre wind speed
+          - h1012       # Significant wave height 10<=T<=12
+          - h1214       # Significant wave height 12<=T<=14
+          - h1417       # Significant wave height 14<=T<=17
+          - h1721       # Significant wave height 17<=T<=21
+          - h2125       # Significant wave height 21<=T<=25
+          - h2530       # Significant wave height 25<=T<=30
         format: grib    # (default : grib) or binary
         at:
           - timestep: 01:00
