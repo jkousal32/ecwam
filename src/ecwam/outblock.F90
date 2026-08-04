@@ -70,6 +70,7 @@ SUBROUTINE OUTBLOCK (KIJS, KIJL, MIJ,                 &
       USE YOWSTAT  , ONLY : IREFRA
 
       USE YOMHOOK  , ONLY : LHOOK,   DR_HOOK, JPHOOK
+      USE, INTRINSIC :: IEEE_ARITHMETIC, ONLY : IEEE_IS_NAN
 
 ! ----------------------------------------------------------------------
 
@@ -121,11 +122,13 @@ SUBROUTINE OUTBLOCK (KIJS, KIJL, MIJ,                 &
 
       INTEGER(KIND=JWIM) :: IJ, K, M, ITG, ITR, IH
       INTEGER(KIND=JWIM) :: IRA
+      INTEGER(KIND=JWIM) :: ITEWHOUT, INANNUM
       
       REAL(KIND=JWRB) :: SIG
       REAL(KIND=JWRB) :: GOZPI 
       REAL(KIND=JWRB) :: XMODEL_CUTOFF
       REAL(KIND=JWRB) :: TEWHMIN, TEWHMAX
+      REAL(KIND=JWRB) :: ZTEWHVAL
       REAL(KIND=JPHOOK) :: ZHOOK_HANDLE
       REAL(KIND=JWRB), DIMENSION(KIJL) :: EM, FM, DP
       REAL(KIND=JWRB), DIMENSION(KIJL) :: C3, C4, BF, QP, HMAX, TMAX
@@ -516,9 +519,29 @@ IF (LHOOK) CALL DR_HOOK('OUTBLOCK',0,ZHOOK_HANDLE)
         IF (IPFGTBL(54 + 3*NTRAIN + IH) /= 0) THEN
           TEWHMIN = REAL(IPRMINFO(54 + 3*NTRAIN + IH,4),JWRB)
           TEWHMAX = REAL(IPRMINFO(54 + 3*NTRAIN + IH,5),JWRB) 
-          CALL SEBTMEAN (KIJS, KIJL, FL2ND, TEWHMIN, TEWHMAX, BOUT(:,ITOBOUT(54 + 3*NTRAIN + IH)))
+          ITEWHOUT = ITOBOUT(54 + 3*NTRAIN + IH)
+          CALL SEBTMEAN (KIJS, KIJL, FL2ND, TEWHMIN, TEWHMAX, BOUT(:,ITEWHOUT))
+
+!         Debug instrumentation for invalid TEWH values before wave-height conversion.
+          INANNUM = 0
+          DO IJ=KIJS,KIJL
+            ZTEWHVAL = BOUT(IJ,ITEWHOUT)
+            IF (IEEE_IS_NAN(ZTEWHVAL)) THEN
+              INANNUM = INANNUM + 1
+              IF (INANNUM <= 32) THEN
+                WRITE(0,*) 'OUTBLOCK TEWH_NAN: IH=',IH,' IPRM=',54 + 3*NTRAIN + IH, &
+     &                     ' ITOBOUT=',ITEWHOUT,' IJ=',IJ,' MIJ=',MIJ(IJ), &
+     &                     ' IODP=',IODP(IJ),' TB=',TEWHMIN,' TT=',TEWHMAX
+              ENDIF
+              BOUT(IJ,ITEWHOUT) = 0._JWRB
+            ENDIF
+          ENDDO
+          IF (INANNUM > 0) THEN
+            WRITE(0,*) 'OUTBLOCK TEWH_NAN_SUMMARY: IH=',IH,' IPRM=',54 + 3*NTRAIN + IH, &
+     &                 ' ITOBOUT=',ITEWHOUT,' NAN_COUNT=',INANNUM,' KIJS=',KIJS,' KIJL=',KIJL
+          ENDIF
 !         SIGNIFICANT WAVE HEIGHT CONVERSION
-          BOUT(KIJS:KIJL,ITOBOUT(54 + 3*NTRAIN + IH))=4._JWRB*SQRT(MAX(BOUT(KIJS:KIJL,ITOBOUT(54 + 3*NTRAIN + IH)),0._JWRB))
+          BOUT(KIJS:KIJL,ITEWHOUT)=4._JWRB*SQRT(MAX(BOUT(KIJS:KIJL,ITEWHOUT),0._JWRB))
         ENDIF
       ENDDO
 
