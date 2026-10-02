@@ -290,28 +290,6 @@ IF (LHOOK) CALL DR_HOOK('WDFLUXES',0,ZHOOK_HANDLE)
      &                   TAUOC, TAUICX, TAUICY,           &
      &                   PHIOCD, PHIEPS, PHIAW,           &
      &                  .FALSE.)
-        ENDIF
-
-        CALL SNONLIN (KIJS, KIJL, FL1, FLD, SL, WAVNUM, DEPTH, AKMEAN)
-
-        IF (LWVFLX_SNL) THEN
-          CALL WNFLUXES (KIJS, KIJL,                        &
-     &                   MIJ, RHOWGDFTH,                    &
-     &                   CINV,                              &
-     &                   SSOURCE, SLICE, CICOVER,           &
-     &                   PHIWA,                             &
-     &                   EMEAN, F1MEAN, WSWAVE, WDWAVE,     &
-     &                   USTRA, VSTRA,                      &
-     &                   UFRIC, AIRD,                       &
-     &                   NPHIEPS, NTAUOC, NSWH, NMWP,       &
-     &                   NEMOTAUX, NEMOTAUY,                &
-     &                   NEMOTAUICX, NEMOTAUICY,            &
-     &                   NEMOWSWAVE, NEMOPHIF,              &
-     &                   TAUXD, TAUYD, TAUOCXD, TAUOCYD,    &
-     &                   TAUOC, TAUICX, TAUICY,             &
-     &                   PHIOCD, PHIEPS, PHIAW,             &
-     &                  .FALSE.)
-        ENDIF
 
         IF (LWFLUX .OR. LWSPRAY) THEN
          CALL FEMEANWS(KIJS, KIJL, FL1, XLLWS, FMEANWS, EMEANWS)
