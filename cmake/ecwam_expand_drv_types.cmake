@@ -41,7 +41,7 @@ macro( ecwam_expand_drv_types )
           COMMAND ${FYPP} ${FYPP_ARGS} -m io -m os -DTYPE_NAME='${_type}'
                   -M ${CMAKE_CURRENT_SOURCE_DIR}/../../share/ecwam/scripts -m ecwam_yaml_reader
                   ${CMAKE_CURRENT_SOURCE_DIR}/drvtype_mod.fypp > ${_type}_type_mod.F90
-          DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/drvtype_mod.fypp
+          DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/drvtype_mod.fypp ${CMAKE_CURRENT_SOURCE_DIR}/yowdrvtype_config.yml
           VERBATIM)
       list( APPEND ecwam_srcs ${CMAKE_CURRENT_BINARY_DIR}/${_type}_type_mod.F90)
    endforeach()
@@ -50,7 +50,7 @@ macro( ecwam_expand_drv_types )
        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/yowdrvtype.F90
        COMMAND ${FYPP} -m io -m os -M ${CMAKE_CURRENT_SOURCE_DIR}/../../share/ecwam/scripts -m ecwam_yaml_reader
                ${CMAKE_CURRENT_SOURCE_DIR}/yowdrvtype.fypp > yowdrvtype.F90
-       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/yowdrvtype.fypp
+       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/yowdrvtype.fypp ${CMAKE_CURRENT_SOURCE_DIR}/yowdrvtype_config.yml
        VERBATIM)
    list( APPEND ecwam_srcs ${CMAKE_CURRENT_BINARY_DIR}/yowdrvtype.F90)
 
