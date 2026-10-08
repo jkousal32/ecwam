@@ -32,7 +32,7 @@ objtypes:
      rank: 2
      types: [real]
      vars: [[wsemean, wsfmean, ustokes, vstokes, phieps, phiocd, phiaw, tauoc, tauxd, tauyd,
-            tauocxd, tauocyd, tauicx, tauicy, strnms, altwh, caltwh, raltcor]]
+            tauocxd, tauocyd, tauicx, tauicy, tauocicx, tauocicy, strnms, altwh, caltwh, raltcor]]
   wvgridglo:
      rank: 1
      types: [int]

@@ -23,6 +23,7 @@
      &                     USTOKES, VSTOKES, STRNMS,           &
      &                     TAUXD, TAUYD, TAUOCXD,              &
      &                     TAUOCYD, TAUOC, TAUICX, TAUICY,     & 
+     &                     TAUOCICX, TAUOCICY,                 &
      &                     PHIOCD, PHIEPS, PHIAW,              &
      &                     NEMOUSTOKES, NEMOVSTOKES, NEMOSTRN, &
      &                     NPHIEPS, NTAUOC, NSWH,              &
@@ -110,6 +111,7 @@
       REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: UFRIC, Z0M, Z0B, CHRNCK, CITHICK
       REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: TAUXD, TAUYD, TAUOCXD, TAUOCYD, TAUOC
       REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: TAUICX, TAUICY
+      REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: TAUOCICX, TAUOCICY
       REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: PHIOCD, PHIEPS, PHIAW, USTOKES, VSTOKES
       REAL(KIND=JWRB), DIMENSION(KIJL), INTENT(INOUT) :: WSEMEAN, WSFMEAN, STRNMS
       REAL(KIND=JWRO), DIMENSION(KIJL), INTENT(INOUT) :: NEMOUSTOKES, NEMOVSTOKES, NEMOSTRN
@@ -188,7 +190,9 @@ IF (LHOOK) CALL DR_HOOK('WDFLUXES',0,ZHOOK_HANDLE)
         ENDDO
       ENDDO
 
-      IF (LWNEMOCOUWRS .AND. (.NOT. (LCIWA1 .OR. LCIWA2 .OR. LCIWA3)))  THEN
+!     SLICE IS USED IN WNFLUXES IF LWNEMOCOUWRS.
+!     MAKE SURE IT IS DEFINED WHEN SDICE IS NOT CALLED TO SET IT.
+      IF (LWNEMOCOUWRS .AND. (.NOT. (LICERUN .AND. (LCIWA1 .OR. LCIWA2 .OR. LCIWA3))))  THEN
         DO M=1,NFRE
           DO K=1,NANG
             DO IJ=KIJS,KIJL
@@ -283,6 +287,7 @@ IF (LHOOK) CALL DR_HOOK('WDFLUXES',0,ZHOOK_HANDLE)
      &                 NEMOWSWAVE, NEMOPHIF,              &
      &                 TAUXD, TAUYD, TAUOCXD, TAUOCYD,    &
      &                 TAUOC, TAUICX, TAUICY,             &
+     &                 TAUOCICX, TAUOCICY,                &
      &                 PHIOCD, PHIEPS, PHIAW,             &
      &                .FALSE.)
 
